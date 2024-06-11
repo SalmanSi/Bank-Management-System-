@@ -7,7 +7,7 @@ This project is a comprehensive banking management system featuring two main int
 1. [Features](#features)
 2. [ERD](#erd)
 3. [Installation](#installation)
-4. [UI](#user interface)
+4. [UI]
 
 
 ## Features
