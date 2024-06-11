@@ -1,0 +1,156 @@
+{% extends 'bank/layout.html' %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;    
+        }
+
+        h1, h2 {
+            color: #000000;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2bff00;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        a.button {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            background-color: #428bca;
+            padding: 12px 20px;
+            border-radius: 4px;
+            text-align: center;
+            width: 100%; /* Make the button full-width */
+        }
+
+        a.button:hover {
+            background-color: #3071a9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Transaction Details</h1>
+
+    {% if recipient_list_sent %}
+        <h2>Sent Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Account ID</th>
+                    <th>Amount</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Recipient ID</th>
+                    <th>Recipient Name</th>
+                    <th>Location</th>
+                    <th>Purpose</th>
+                    <!-- Add more headers based on your transaction details -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in recipient_list_sent %}
+                    <tr>
+                        <td>{{ data.0.0 }}</td>
+                        <td>{{ data.0.1 }}</td>
+                        <td>{{ data.0.2 }}</td>
+                        <td>{{ data.0.3 }}</td>
+                        <td>{{ data.0.4 }}</td>
+                        <td>{{ data.0.5 }}</td>
+                        <td>{{ data.0.6 }}</td>
+                        <td>{{ data.1 }}</td>
+                        <td>{{ data.0.7 }}</td>
+                        <td>{{ data.0.8 }}</td>
+                        <!-- Add more cells based on your transaction details -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No sent transactions found.</p>
+    {% endif %}
+
+    {% if recipient_list_received %}
+        <h2>Received Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Account ID</th>
+                    <th>Amount</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Recipient ID</th>
+                    <th>Recipient Name</th>
+                    <th>Location</th>
+                    <th>Purpose</th>
+                    <!-- Add more headers based on your transaction details -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in recipient_list_received %}
+                    <tr>
+                        <td>{{ data.0.0 }}</td>
+                        <td>{{ data.0.1 }}</td>
+                        <td>{{ data.0.2 }}</td>
+                        <td>{{ data.0.3 }}</td>
+                        <td>{{ data.0.4 }}</td>
+                        <td>{{ data.0.5 }}</td>
+                        <td>{{ data.0.6 }}</td>
+                        <td>{{ data.1 }}</td>
+                        <td>{{ data.0.7 }}</td>
+                        <td>{{ data.0.8 }}</td>
+                        <!-- Add more cells based on your transaction details -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No received transactions found.</p>
+    {% endif %}
+
+    <a href="{% url 'user' %}" class="button">User</a>
+
+</body>
+</html>
+{% endblock %}

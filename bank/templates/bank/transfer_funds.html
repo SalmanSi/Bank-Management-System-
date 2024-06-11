@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Funds</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        h1 {
+            color: #428bca;
+        }
+
+        div {
+            background-color: #fff;
+            margin: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            max-width: 400px;
+            margin: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #428bca;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3071a9;
+        }
+
+        a.button {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            background-color: #428bca;
+            padding: 12px 20px;
+            border-radius: 4px;
+            text-align: center;
+            width: 100%;
+        }
+
+        a.button:hover {
+            background-color: #3071a9;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Transfer Funds</h1>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    {% if r_name %}
+        <div>
+            <p>Recipient's Name: {{ r_name }}</p>
+            <form action="{% url 'confirm_transfer' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="amount" value="{{ amount }}">
+                <input type="hidden" name="recipient_account_id" value="{{ recipient_account_id }}">
+                <input type="hidden" name="purpose" value="{{ purpose }}">
+                <input type="submit" value="Confirm Transfer">
+            </form>
+        </div>
+    {% endif %}
+
+    <form action="{% url 'transfer_funds' %}" method="post">
+        {% csrf_token %}
+
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" id="amount" required>
+
+        <br>
+
+        <label for="recipient_account_id">Recipient Account ID:</label>
+        <input type="number" name="recipient_account_id" id="recipient_account_id" required>
+
+        <br>
+
+        <label for="purpose">Purpose of Payment:</label>
+        <textarea name="purpose" id="purpose" rows="4" required></textarea>
+
+        <br>
+
+        <input type="submit" value="Transfer Funds">
+    </form>
+    <a href="{% url 'user' %}" class="button">User</a>
+
+</body>
+</html>
